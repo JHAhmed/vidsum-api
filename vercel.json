@@ -1,0 +1,22 @@
+{
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.11"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
+  ],
+  "build": {
+    "env": {
+      "PATH": "/usr/local/bin:/usr/bin:/bin:/opt/bin:/vercel/path0/bin" 
+    }
+  }
+}
