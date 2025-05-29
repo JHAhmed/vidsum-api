@@ -139,7 +139,7 @@ class YouTubeProcessor:
             os.makedirs(output_folder, exist_ok=True)
 
             subprocess.run([
-                'ffmpeg',
+                FFMPEG_PATH,  
                 '-i', video_path,
                 '-vf', f'fps=1/{interval_seconds}',
                 os.path.join(output_folder, 'frame_%04d.jpg')
@@ -226,6 +226,7 @@ app = FastAPI()
 security = HTTPBearer()
 
 API_TOKEN = "1vsapitfws1"
+FFMPEG_PATH = os.path.abspath("bin/ffmpeg")
 
 # Initialize YouTubeProcessor
 # IMPORTANT: For serverless functions, instantiate processor inside the route or pass app context
