@@ -263,8 +263,8 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
 
 # --- Define your API Endpoints ---
 
-@app.post("/")
-async def read_root(token: HTTPAuthorizationCredentials = Depends(verify_token)):
+@app.get("/")
+async def read_root():
     return {"message": "Welcome to the YouTube Processing API!"}
 
 @app.post("/info")
