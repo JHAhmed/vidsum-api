@@ -2,6 +2,5 @@ fastapi
 uvicorn # ASGI server for FastAPI
 python-dotenv # For loading environment variables
 openai # For OpenAI API
-uuid # For generating unique identifiers
 yt-dlp # For YouTube downloads
 # Any other dependencies your YouTubeProcessor needs (e.g., ffmpeg is required externally, not via pip)

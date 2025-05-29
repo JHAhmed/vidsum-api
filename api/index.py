@@ -14,6 +14,11 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware # For CORS
 
+
+ffmpeg_dir = os.path.abspath("bin")
+os.environ["PATH"] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
+
+
 # Load environment variables once at the top
 load_dotenv()
 
@@ -139,7 +144,7 @@ class YouTubeProcessor:
             os.makedirs(output_folder, exist_ok=True)
 
             subprocess.run([
-                FFMPEG_PATH,  
+                "ffmpeg",  
                 '-i', video_path,
                 '-vf', f'fps=1/{interval_seconds}',
                 os.path.join(output_folder, 'frame_%04d.jpg')
@@ -226,7 +231,6 @@ app = FastAPI()
 security = HTTPBearer()
 
 API_TOKEN = "1vsapitfws1"
-FFMPEG_PATH = os.path.abspath("bin/ffmpeg")
 
 # Initialize YouTubeProcessor
 # IMPORTANT: For serverless functions, instantiate processor inside the route or pass app context
