@@ -3,8 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Test files
+# Other files
 app.py
+test.py
+git-filter-repo
+git-filter-repo.*
 
 # Distribution / packaging
 .Python

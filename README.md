@@ -12,7 +12,7 @@ This is the backend service for [VidSum](https://github.com/JHAhmed/vidsum), a Y
 
 ---
 
-## 🚀 Features
+## Features
 
 * **YouTube Audio Extraction:** Downloads and processes video/audio using `yt-dlp`.
 * **Transcript Processing:** Converts audio to text using external AI APIs (e.g. Gemini, OpenAI).
@@ -20,16 +20,15 @@ This is the backend service for [VidSum](https://github.com/JHAhmed/vidsum), a Y
 
 ---
 
-## 📦 Tech Stack
+## Tech Stack
 
 * Python 3.10+
 * FastAPI
 * yt-dlp (uses `ffmpeg` and `ffprobe` binaries under `bin/`)
-* Uvicorn (ASGI server)
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 1. **Clone the repo**
 
@@ -46,7 +45,8 @@ This is the backend service for [VidSum](https://github.com/JHAhmed/vidsum), a Y
 
 3. **Ensure ffmpeg is available**
 
-   * `bin/ffmpeg` and `bin/ffprobe` are bundled.
+   * `bin/ffmpeg.exe` and `bin/ffprobe.exe` are bundled.
+   * NOTE: These binaries only work on Windows. If you're on Linux or macOS, you need to install `ffmpeg` and `ffprobe` system-wide.
    * These will be used directly by `yt-dlp`. No need for system-wide installation.
 
 4. **Configure Environment**
@@ -69,7 +69,7 @@ This is the backend service for [VidSum](https://github.com/JHAhmed/vidsum), a Y
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 The core endpoints are consumed by the VidSum frontend. Most users won’t need to interact with them directly.
 
@@ -82,7 +82,7 @@ The core endpoints are consumed by the VidSum frontend. Most users won’t need 
 
 ---
 
-## 🧼 Notes
+## Notes
 
 * This repo is backend-only. For the full experience, use it with [vidsum](https://github.com/JHAhmed/vidsum).
 * Avoid modifying unless you're extending or debugging.

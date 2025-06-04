@@ -21,12 +21,10 @@ from pydantic import BaseModel
 from typing import Optional
 
 load_dotenv()
-DEV = os.getenv("DEV", "false").lower() in ("true", "1", "yes")
 
-if not DEV:
-    ffmpeg_dir = os.path.abspath("bin")
-    os.environ["PATH"] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
-
+# Ensure ffmpeg is in the PATH
+ffmpeg_dir = os.path.abspath("bin")
+os.environ["PATH"] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
 
 class YouTubeProcessor:
     def __init__(self, openai_api_key=None):
@@ -263,7 +261,7 @@ class YouTubeProcessor:
             print(f"Error downloading video from {url} to {output_path}: {e}")
             return None
 
-    def extract_frames(self, video_path, base_output_dir='frames', interval_seconds=600):
+    def extract_frames(self, video_path, base_output_dir='frames', interval_seconds=60):
         """Extract frames from a video at specified intervals."""
         if not os.path.exists(video_path):
             print(f"Video file not found at {video_path}")
@@ -281,6 +279,8 @@ class YouTubeProcessor:
                 "-vf", f"fps=1/{interval_seconds},scale=iw/2:ih/2", # Scales to half size
                 os.path.join(output_folder, "frame_%04d.jpg")
             ], check=True, capture_output=True, text=True) # Added text=True for stderr
+
+            
             print(f"Frames saved to: {output_folder}")
             return output_folder
         except FileNotFoundError:
@@ -292,6 +292,7 @@ class YouTubeProcessor:
         except Exception as e:
             print(f"An unexpected error occurred during frame extraction: {e}")
             return None
+
 
     def delete_frames(self, frames_dir, video_path=None):
         """Delete all extracted frames from the specified directory and optionally the video file."""
