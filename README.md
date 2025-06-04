@@ -1,7 +1,3 @@
-Here's a concise and focused `README.md` for the `vidsum-api` repository:
-
----
-
 # VidSum API – FastAPI Backend for VidSum
 
 This is the backend service for [VidSum](https://github.com/JHAhmed/vidsum), a YouTube video summarizer. It’s built with [FastAPI](https://fastapi.tiangolo.com/) and leverages `yt-dlp` (with `ffmpeg`) to download and process videos.
