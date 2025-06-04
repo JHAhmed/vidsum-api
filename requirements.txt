@@ -1,6 +1,8 @@
-fastapi
+fastapi # Web framework for building APIs
 uvicorn # ASGI server for FastAPI
 python-dotenv # For loading environment variables
 openai # For OpenAI API
 yt-dlp # For YouTube downloads
-# Any other dependencies your YouTubeProcessor needs (e.g., ffmpeg is required externally, not via pip)
+pydub # For YouTube audio processing
+# uuid # For generating unique IDs, usually part of the Python standard library
+# pydantic # For data validation and settings management, usually part of the FastAPI stack
