@@ -23,8 +23,22 @@ from typing import Optional
 load_dotenv()
 
 # Ensure ffmpeg is in the PATH
-ffmpeg_dir = os.path.abspath("bin")
-os.environ["PATH"] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
+# ffmpeg_dir = os.path.abspath("bin")
+# os.environ["PATH"] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+# Path to your binaries
+BIN_DIR = PROJECT_ROOT / "bin"
+FFMPEG_PATH = BIN_DIR / "ffmpeg.exe"
+FFPROBE_PATH = BIN_DIR / "ffprobe.exe"
+
+# You can add a quick check to make sure the file exists
+print(f"Using ffmpeg at: {FFMPEG_PATH}")
+print(f"FFmpeg exists: {FFMPEG_PATH.exists()}")
+
+AudioSegment.converter = str(FFMPEG_PATH)
+AudioSegment.ffprobe = str(FFPROBE_PATH)
 
 class YouTubeProcessor:
     def __init__(self, openai_api_key=None):
@@ -59,7 +73,6 @@ class YouTubeProcessor:
         except Exception as e:
             print(f"Error getting video info for {url}: {e}")
             return None
-
 
     def get_captions(self, url, lang='en'):
         """Extract and return captions from a YouTube video.
@@ -151,9 +164,6 @@ class YouTubeProcessor:
             # General exception handler
             print(f"Error extracting captions: {e}")
             return None
-
-
-
 
     def chunk_audio(self, audio_path, chunk_length_seconds=1200):
         """Split an audio file into chunks."""
@@ -274,7 +284,7 @@ class YouTubeProcessor:
         try:
             os.makedirs(output_folder, exist_ok=True)
             subprocess.run([
-                "ffmpeg",
+                str(FFMPEG_PATH),
                 "-i", video_path,
                 "-vf", f"fps=1/{interval_seconds},scale=iw/2:ih/2", # Scales to half size
                 os.path.join(output_folder, "frame_%04d.jpg")
@@ -292,7 +302,6 @@ class YouTubeProcessor:
         except Exception as e:
             print(f"An unexpected error occurred during frame extraction: {e}")
             return None
-
 
     def delete_frames(self, frames_dir, video_path=None):
         """Delete all extracted frames from the specified directory and optionally the video file."""
@@ -330,7 +339,6 @@ class YouTubeProcessor:
         except Exception as e:
             print(f"An error occurred while reading images for Base64 conversion: {e}")
             return None
-
 
 app = FastAPI()
 # security = HTTPBearer() # Kept, but not actively used for route protection yet

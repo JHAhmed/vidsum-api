@@ -42,7 +42,7 @@ This is the backend service for [VidSum](https://github.com/JHAhmed/vidsum), a Y
 3. **Ensure ffmpeg is available**
 
    * `bin/ffmpeg.exe` and `bin/ffprobe.exe` are bundled.
-   * NOTE: These binaries only work on Windows. If you're on Linux or macOS, you need to install `ffmpeg` and `ffprobe` system-wide.
+   * **NOTE:** These binaries only work on Windows. If you're on Linux or macOS, you need to install `ffmpeg` and `ffprobe` system-wide.
    * These will be used directly by `yt-dlp`. No need for system-wide installation.
 
 4. **Configure Environment**
@@ -72,9 +72,9 @@ The core endpoints are consumed by the VidSum frontend. Most users won’t need 
 | Method | Endpoint       | Description                          |
 | ------ | -------------- | ------------------------------------ |
 | POST   | `/info`       | Accepts YouTube URL, returns info   |
-| POST   | `/captions`   | Accepts YouTube URL, returns captions |
+| POST   | `/captions`   | Accepts YouTube URL, returns captions (if available) |
 | POST   | `/transcribe`  | Accepts YouTube URL, transcribes audio, returns transcript |
-| POST   | `/frames`  | Accepts YouTube URL, extracts video frames at given intervals, returns frame data as base64 |
+| POST   | `/frames`  | Accepts YouTube URL and interval (in seconds), extracts video frames at given intervals, returns frame data as base64 |
 
 ---
 
